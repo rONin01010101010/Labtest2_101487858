@@ -24,3 +24,14 @@
 .error {
   color: red;
 }
+
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.end-msg {
+  color: #666;
+  font-style: italic;
+}

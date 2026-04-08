@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -10,7 +9,7 @@ import { Mission } from '../models/mission';
 
 @Component({
   selector: 'app-missiondetails',
-  imports: [CommonModule, RouterLink, MatCardModule, MatProgressSpinnerModule, MatButtonModule, MatIconModule],
+  imports: [RouterLink, MatCardModule, MatProgressSpinnerModule, MatButtonModule, MatIconModule],
   templateUrl: './missiondetails.html',
   styleUrl: './missiondetails.css',
 })

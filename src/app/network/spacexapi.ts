@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { Mission } from '../models/mission';
 
 @Injectable({
@@ -8,11 +8,12 @@ import { Mission } from '../models/mission';
 })
 export class SpaceXApiService {
   private baseUrl = 'https://api.spacexdata.com/v3/launches';
+  private detailsCache = new Map<number, Observable<Mission>>();
 
   constructor(private http: HttpClient) {}
 
-  getAllLaunches(): Observable<Mission[]> {
-    return this.http.get<Mission[]>(this.baseUrl);
+  getLaunches(limit: number, offset: number): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.baseUrl}?limit=${limit}&offset=${offset}`);
   }
 
   getLaunchesByYear(year: string): Observable<Mission[]> {
@@ -20,6 +21,12 @@ export class SpaceXApiService {
   }
 
   getMissionDetails(flightNumber: number): Observable<Mission> {
-    return this.http.get<Mission>(`${this.baseUrl}/${flightNumber}`);
+    if (!this.detailsCache.has(flightNumber)) {
+      const req$ = this.http.get<Mission>(`${this.baseUrl}/${flightNumber}`).pipe(
+        shareReplay(1)
+      );
+      this.detailsCache.set(flightNumber, req$);
+    }
+    return this.detailsCache.get(flightNumber)!;
   }
 }

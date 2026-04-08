@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatChipsModule } from '@angular/material/chips';
 import { SpaceXApiService } from '../network/spacexapi';
 import { Mission } from '../models/mission';
 
 @Component({
   selector: 'app-missionfilter',
-  imports: [CommonModule, FormsModule, RouterLink, MatCardModule, MatButtonToggleModule, MatProgressSpinnerModule, MatChipsModule],
+  imports: [RouterLink, MatCardModule, MatProgressSpinnerModule],
   templateUrl: './missionfilter.html',
   styleUrl: './missionfilter.css',
 })
@@ -28,6 +24,7 @@ export class Missionfilter {
     this.selectedYear = year;
     this.loading = true;
     this.error = '';
+    this.missions = [];
     this.spaceXApi.getLaunchesByYear(year).subscribe({
       next: (data) => {
         this.missions = data;
