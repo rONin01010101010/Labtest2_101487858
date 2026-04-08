@@ -1,0 +1,47 @@
+.container {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.details-card {
+  margin-top: 16px;
+  background-color: #fff8f0;
+}
+
+.detail-section {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.patch-img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.mission-title {
+  color: #e65100;
+}
+
+h3 {
+  color: #bf360c;
+  margin-top: 16px;
+}
+
+.links {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.error { color: red; }

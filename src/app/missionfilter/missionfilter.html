@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Filter Missions by Launch Year</h1>
+
+  <div class="year-chips">
+    <span *ngFor="let year of years">
+      <button mat-chip-option
+        [class.selected]="selectedYear === year"
+        (click)="filterByYear(year)">
+        {{ year }}
+      </button>
+    </span>
+  </div>
+
+  <div *ngIf="loading" class="spinner-wrap">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <div class="grid" *ngIf="!loading && missions.length > 0">
+    <mat-card *ngFor="let mission of missions" class="mission-card" [routerLink]="['/missions', mission.flight_number]">
+      <img mat-card-image [src]="mission.links.mission_patch_small || 'https://via.placeholder.com/200'" alt="patch" />
+      <mat-card-content>
+        <h3>{{ mission.mission_name }} #{{ mission.flight_number }}</h3>
+        <p><strong>Mission Ids:</strong> {{ mission.mission_id?.join(', ') || '-' }}</p>
+        <p><strong>Launch Year:</strong> {{ mission.launch_year }}</p>
+        <p><strong>Successful Launch:</strong> {{ mission.launch_success === null ? 'No Data' : (mission.launch_success ? 'Yes' : 'No') }}</p>
+        <p><strong>Successful Landing:</strong> {{ mission.land_success === null ? 'No Data' : (mission.land_success ? 'Yes' : 'No') }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <p *ngIf="!loading && selectedYear && missions.length === 0 && !error">No missions found for {{ selectedYear }}.</p>
+</div>

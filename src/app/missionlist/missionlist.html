@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>SpaceX Mission Launch List</h1>
+
+  <div *ngIf="loading" class="spinner-wrap">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <mat-card *ngFor="let mission of missions" class="mission-card" [routerLink]="['/missions', mission.flight_number]">
+    <mat-card-header>
+      <img mat-card-avatar [src]="mission.links.mission_patch_small || 'https://via.placeholder.com/50'" alt="patch" />
+      <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+      <mat-card-subtitle>{{ mission.launch_year }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ mission.details || 'No details available.' }}</p>
+      <p><strong>Rocket:</strong> {{ mission.rocket.rocket_name }} ({{ mission.rocket.rocket_type }})</p>
+      <p><strong>Flight #:</strong> {{ mission.flight_number }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

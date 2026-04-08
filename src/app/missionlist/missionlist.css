@@ -1,0 +1,26 @@
+.container {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.mission-card {
+  margin-bottom: 16px;
+  cursor: pointer;
+  background-color: #90caf9;
+  transition: box-shadow 0.2s;
+}
+
+.mission-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.error {
+  color: red;
+}
